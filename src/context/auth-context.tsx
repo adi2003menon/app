@@ -102,7 +102,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 export function useAuth() {
   const context = useContext(AuthContext)
   if (!context) {
-    throw new Error('useAuth must be used within AuthProvider')
+    // Return default context during SSR for client components
+    return {
+      user: null,
+      loading: false,
+      login: async () => {},
+      register: async () => {},
+      logout: () => {}
+    }
   }
   return context
 }

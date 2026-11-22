@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import './globals.css'
-import { AuthProvider } from '@/context/auth-context'
 import { Toaster } from '@/components/ui/toaster'
+import { AuthProvider } from '@/components/providers/auth-provider'
 
 export const metadata = {
   title: 'Kauthuk',
