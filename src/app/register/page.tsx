@@ -24,8 +24,8 @@ export default function RegisterPage() {
 
     try {
       await register(email, password, name)
-    } catch (err) {
-      setError('Failed to create account. Please try again.')
+    } catch (err: any) {
+      setError(err?.message || 'Failed to create account. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -93,7 +93,7 @@ export default function RegisterPage() {
               </p>
             </div>
 
-            <Button type="submit" className="w-full cursor-pointer" disabled={isLoading}>
+            <Button type="submit" className="w-full cursor-pointer" loading={isLoading}>
               {isLoading ? 'Creating Account...' : 'Sign Up'}
             </Button>
           </form>

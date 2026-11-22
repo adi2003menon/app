@@ -68,7 +68,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = async (email: string, password: string, name: string) => {
     setLoading(true)
     await new Promise(resolve => setTimeout(resolve, 1000))
-    
+
     const mockUser: User = {
       id: '1',
       email,
@@ -79,11 +79,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       verified: false,
       privacyLevel: 'anyone'
     }
-    
-    localStorage.setItem('mock_user', JSON.stringify(mockUser))
-    setUser(mockUser)
-    setLoading(false)
-    router.push('/onboarding')
+
+    try {
+      localStorage.setItem('mock_user', JSON.stringify(mockUser))
+      setUser(mockUser)
+    } catch (e) {
+      console.error('Failed to store user:', e)
+    } finally {
+      setLoading(false)
+      router.push('/onboarding')
+    }
   }
 
   const logout = () => {
