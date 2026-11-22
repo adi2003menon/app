@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
-import { useRouter } from 'next/navigation'
 
 type User = {
   id: string
@@ -27,7 +26,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
-  const router = useRouter()
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -59,7 +57,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('mock_user', JSON.stringify(mockUser))
     setUser(mockUser)
     setLoading(false)
-    router.push('/home')
+    window.location.href = '/home'
   }
 
   const register = async (email: string, password: string, name: string) => {
@@ -80,13 +78,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('mock_user', JSON.stringify(mockUser))
     setUser(mockUser)
     setLoading(false)
-    router.push('/onboarding')
+    window.location.href = '/onboarding'
   }
 
   const logout = () => {
     localStorage.removeItem('mock_user')
     setUser(null)
-    router.push('/login')
+    window.location.href = '/login'
   }
 
   return (
@@ -99,7 +97,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 export function useAuth() {
   const context = useContext(AuthContext)
   if (!context) {
-    throw new Error('useAuth must be used within AuthProvider')
+    return {
+      user: null,
+      loading: false,
+      login: async () => {},
+      register: async () => {},
+      logout: () => {}
+    }
   }
   return context
 }
