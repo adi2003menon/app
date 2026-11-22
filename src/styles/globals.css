@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom properties for design tokens */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 224 71.4% 4.5%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.5%;
+  --secondary-foreground: 222.2 84% 4.9%;
+  --muted: 210 10% 98%;
+  --muted-foreground: 215.4 16.6% 46.9%;
+  --accent: 224 71.4% 50%;
+  --accent-foreground: 210 40% 98%;
+  --border: 214 32.1% 91.2%;
+  --input: 214 32.1% 91.2%;
+  --ring: 224 71.4% 50%;
+  --radius: 0.5rem;
+}
+
+[data-theme="dark"] {
+  --background: 224 71% 4%;
+  --foreground: 210 40% 98%;
+  --primary: 224 71.4% 50%;
+  --primary-foreground: 222.2 47.4% 10.3%;
+  --secondary: 210 20% 15%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 210 10% 15%;
+  --muted-foreground: 215.4 16.6% 60%;
+  --accent: 224 71.4% 50%;
+  --accent-foreground: 222.2 47.4% 10.3%;
+  --border: 210 10% 20%;
+  --input: 210 10% 20%;
+  --ring: 224 71.4% 50%;
+}
+
+:root {
+  --font-sans: Inter, system-ui, sans-serif;
+  font-family: var(--font-sans);
+}
+
+* {
+  @apply rounded-border;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-size: 16px;
+  line-height: 1.5;
+}
