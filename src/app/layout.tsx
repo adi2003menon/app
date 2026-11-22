@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import './globals.css'
+import { AuthProvider } from '@/context/auth-context'
 import { Toaster } from '@/components/ui/toaster'
 
 export const metadata = {
@@ -15,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-background text-foreground">
-        {children}
-        <Toaster />
+        <AuthProvider>
+          {children}
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   )

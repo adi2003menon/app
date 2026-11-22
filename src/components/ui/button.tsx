@@ -40,14 +40,23 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, loading, children, disabled, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button'
+    const classes = cn(buttonVariants({ variant, size, className }))
+
+    if (asChild) {
+      // Slot must receive exactly one child, so no spinner here
+      return (
+        <Slot className={classes} ref={ref} {...props}>
+          {children}
+        </Slot>
+      )
+    }
+
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+      <button
+        className={classes}
         ref={ref}
         disabled={disabled || loading}
         aria-busy={loading}
-        aria-disabled={disabled || loading}
         {...props}
       >
         {loading && (
@@ -74,7 +83,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           </svg>
         )}
         {children}
-      </Comp>
+      </button>
     )
   }
 )
