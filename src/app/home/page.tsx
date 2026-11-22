@@ -73,7 +73,7 @@ export default function HomePage() {
                   </div>
                 </CardContent>
               </Card>
-            ))
+            ))}
           </div>
         ) : matches.length === 0 ? (
           <div className="text-center py-12">
